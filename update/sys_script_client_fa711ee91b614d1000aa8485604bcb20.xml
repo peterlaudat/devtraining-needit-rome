@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description>Set the Requested for to the currently logged in user for new records. &#13;
+Users can change the field value</description>
+        <field>active</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>NeedIt Set Requested for</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+
+// QUESTION: Why does the NeedIt Set Requested for Client Script check to see if the form is for a new record? Is the if statement necessary in this script?
+// SOLUTION: There is no default value for the Requested for field. As a result, new NeedIt records will have no value in the Requested for field unless the user enters a value. The assumption is that in most cases, users create their own NeedIt requests. The script is intended as a convenience for the form users. Users can change the value in the Requested for field if they are creating NeedIt records for other users. Removing the if statement from this script would change the Requested for field's value to the currently logged in user every time a NeedIt record is loaded.	
+	
+//  check to see if the form is for a new record. If it is a new record,
+// 	set the Rquested for value to the currently logged in user
+	if(g_form.isNewRecord()){
+		g_form.setValue('u_requested_for', g_user.userID);
+	}
+   
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>peter.laudat</sys_created_by>
+        <sys_created_on>2022-02-08 11:49:21</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>fa711ee91b614d1000aa8485604bcb20</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>NeedIt Set Requested for</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_client_fa711ee91b614d1000aa8485604bcb20</sys_update_name>
+        <sys_updated_by>peter.laudat</sys_updated_by>
+        <sys_updated_on>2022-02-08 11:50:21</sys_updated_on>
+        <table>x_58872_needit_needit</table>
+        <type>onLoad</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>
